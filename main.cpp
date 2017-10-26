@@ -19,11 +19,11 @@
 
 #include <iostream> //Command Prompt Input output
 #include <fstream> //Usage of Files
-#include <curses.h>
+#include <cstdlib>
 
 using namespace std;
 
-string alphabet="a b c d e f g h i j k l m n o p q r s t u v w x y z"; //used for validation
+//string alphabet="a b c d e f g h i j k l m n o p q r s t u v w x y z"; //used for validation
 string line, guessed, word, display;
 int numlines=0,inttries=0;
 ifstream myfile("words.txt"); //File containing all the words
@@ -68,9 +68,9 @@ void guesslet (char a)
     int correct=0,tried=0,validlet=0,k=0;
 
     for (k = 0; k < 51; k+=2) //Alphabetic Checks
-        if (alphabet[k]==a) //Check if letter is in alphabet
+        if (isalpha(a)) //Check if letter is in alphabet
         {
-            validlet=1; //Confirm valid entery
+            validlet=1; //Confirm valid entry
             if (guessed[k]!=a) //Check to see if the letter has been tried before
                 guessed[k]=a; //Save letter in String
                     else
@@ -119,7 +119,6 @@ int selectRandLine ()
 *******************/
 int main ()
 {
-    initscr();
     char a; //Guessing letter
     srand((unsigned)time(0)); //Seed RNG
     while (std::getline(myfile, line)) ++numlines; //Open the word list and count how many words are present.
